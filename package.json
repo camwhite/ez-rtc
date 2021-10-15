@@ -1,0 +1,27 @@
+{
+  "name": "ez-rtc",
+  "version": "0.1.0",
+  "description": "Easily enable P2P",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "keywords": [
+    "webRTC",
+    "signalling"
+  ],
+  "author": "camwhite",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.2",
+    "events": "^3.3.0",
+    "socket.io-client": "^4.3.0",
+    "typescript": "^3.9.10"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/events": "^3.0.0",
+    "@types/socket.io-client": "^3.0.0",
+    "@types/webrtc": "0.0.30"
+  }
+}
