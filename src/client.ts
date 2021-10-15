@@ -97,7 +97,7 @@ class EzRTC extends EventEmitter {
       }
     }
     pc.ontrack = ({ streams }) => {
-      this.emit('streams', streams)
+      this.emit('stream', streams[0])
     }
 
     if (this.opts.dataChannel) {

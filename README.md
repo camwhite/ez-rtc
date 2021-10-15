@@ -1,3 +1,3 @@
-# An Ez way to manage peers with WebRTC
+# An Ez way to connect peers via WebRTC
 
 Under Construction 🚧
