@@ -29,7 +29,6 @@ class EzRTC extends EventEmitter {
   constructor(opts: Options) {
     super()
     this.opts = opts
-
     if (!opts.socket) {
       this.socket = io.connect()
     } else {
@@ -64,9 +63,9 @@ class EzRTC extends EventEmitter {
     })
   }
   async getPeerConnection(id: string): Promise<RTCPeerConnection> {
-    const activePc = this.peerConnections.get(id)
-    if (activePc) {
-      return activePc
+    const active = this.peerConnections.get(id)
+    if (active) {
+      return active
     }
 
     const servers = this.opts.iceServers || {
@@ -81,9 +80,11 @@ class EzRTC extends EventEmitter {
 
     await this.getLocalStream()
 
-    this.localStream.getTracks().forEach((track: MediaStreamTrack) => {
-      pc.addTrack(track, this.localStream)
-    })
+    this.localStream
+      .getTracks()
+      .forEach((track: MediaStreamTrack) => {
+        pc.addTrack(track, this.localStream)
+      })
 
     pc.onicecandidate = evt => {
       if (evt.candidate) {
@@ -96,7 +97,7 @@ class EzRTC extends EventEmitter {
       }
     }
     pc.ontrack = ({ streams }) => {
-      this.emit('stream', streams[0])
+      this.emit('streams', streams)
     }
 
     if (this.opts.dataChannel) {
