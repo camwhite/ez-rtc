@@ -1,7 +1,6 @@
 import { Readable } from 'stream'
 import { Socket } from 'socket.io'
 import debug from 'debug'
-import { signalling } from '.'
 
 const log = debug('ez-rtc')
 const readable = new Readable({

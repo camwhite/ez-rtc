@@ -8,6 +8,7 @@ class Peer extends EzRTC {
   }
   async init() {
     await this.getLocalStream()
+    this.socket.emit('join', this.makeOffer)
   }
 }
 
@@ -19,7 +20,6 @@ const peer = new Peer({
 
 ;(async () => {
   await peer.init()
-  await peer.makeOffer(this.channel.user_id)
   peer.on('stream', data => {
     this.streams.push(data)
   })
@@ -33,7 +33,7 @@ import { signalling } from 'ez-rtc'
 const server = http.createServer()
 const sockets = io(server)
 
-sockets.on('connect', socket => {
+sockets.on('connection', socket => {
   const signal = signalling(socket)
   signal.on('data', peer => {
     console.log(`Peer ${peer} connected`)
